@@ -70,7 +70,9 @@ export interface EnrollmentBundlePayload {
 // ==================== CLASSE PRINCIPAL ====================
 export class Thinkific {
   private static client: AxiosInstance = axios.create({
-    baseURL: "https://api.thinkific.com/api/public/v1",
+    // Permite override para mock-server / ambientes de teste via env.
+    // Fallback para a API real do Thinkific quando THINKIFIC_BASE_URL não está definida.
+    baseURL: process.env.THINKIFIC_BASE_URL || "https://api.thinkific.com/api/public/v1",
     headers: {
       "X-Auth-API-Key": process.env.THINKIFIC_API_KEY!,
       "X-Auth-Subdomain": process.env.THINKIFIC_SUBDOMAIN!,
